@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const ClubPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const ClubPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   async function fetchClub(id: string) {
     const options = {
       headers: { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` },
@@ -18,9 +18,11 @@ const ClubPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
     }
   }
 
-  const { slug } = await params;
+  const { id } = await params;
 
-  const club = await fetchClub(slug);
+  console.log(id);
+
+  const club = await fetchClub(id);
 
   console.log(club);
 
