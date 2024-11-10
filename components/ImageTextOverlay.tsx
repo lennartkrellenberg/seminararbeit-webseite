@@ -1,4 +1,4 @@
-import { ImageTextOverlay } from "@/app/page";
+import { ImageTextOverlay } from "@/app/types";
 import Image from "next/image";
 
 export const ImageTextOverlayComponent = ({
@@ -6,14 +6,10 @@ export const ImageTextOverlayComponent = ({
 }: {
   data: ImageTextOverlay;
 }) => {
-  const logoUrl = "http://127.0.0.1:1337" + data.image.formats.large.url;
-  console.log(logoUrl);
-
   return (
-    // Image and text overlay
     <div className="relative mb-10">
       <Image
-        src={logoUrl}
+        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.formats.large.url}`}
         alt={""}
         width={1200}
         height={600}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Club } from "@/app/page";
+import { Club } from "@/app/types";
 
 type TeamCardProps = {
   team: Club;
@@ -12,7 +12,7 @@ function TeamCard({ team }: TeamCardProps) {
     <Card className="overflow-hidden">
       <CardHeader className="p-0">
         <Image
-          src={process.env.STRAPI_URL + team.logo.url}
+          src={process.env.NEXT_PUBLIC_STRAPI_URL + team.logo.url}
           alt={team.name}
           width={400}
           height={300}

@@ -3,18 +3,12 @@ import { Card, CardContent } from "../ui/card";
 
 import { Player } from "@/app/types";
 
-type PlayerCardProps = {
-  player: Player;
-};
-
-function PlayerCard({ player }: PlayerCardProps) {
-  const logoUrl = "http://127.0.0.1:1337" + player.image.formats.medium.url;
-
+function PlayerCard({ player }: { player: Player }) {
   return (
     <Card className=" hover:shadow-lg transition-shadow">
       <CardContent className="p-4">
         <Image
-          src={logoUrl}
+          src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${player.image.formats.medium.url}`}
           alt={player.name}
           width={200}
           height={200}

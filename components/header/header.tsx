@@ -1,79 +1,13 @@
 "use client";
 
+import { NavbarData } from "@/app/types";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-interface NavItem {
-  id: number;
-  name: string; // Name des Navigationspunkts
-  link: string; // Ziel des Links
-}
-
-interface Image {
-  id: number;
-  documentId: string;
-  name: string;
-  alternativeText: string;
-  caption: string;
-  width: number;
-  height: number;
-  formats: {
-    thumbnail: {
-      name: string;
-      hash: string;
-      ext: string;
-      mime: string;
-      path: null;
-      width: number;
-      height: number;
-      size: number;
-      sizeInBytes: number;
-      url: string;
-    };
-    small: {
-      name: string;
-      hash: string;
-      ext: string;
-      mime: string;
-      path: null;
-      width: number;
-      height: number;
-      size: number;
-      sizeInBytes: number;
-      url: string;
-    };
-  };
-  hash: string;
-  ext: string;
-  mime: string;
-  size: number;
-  url: string;
-  previewUrl: null;
-  provider: string;
-  provider_metadata: null;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-}
-
-interface NavbarData {
-  id: number; // ID der Navbar (falls relevant)
-  documentId: string; // ID im CMS oder der Datenquelle
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  brand: string; // Name der Marke
-  items: NavItem[]; // Array der Navigationspunkte
-  logo: Image[];
-}
-
 function Header({ navbarData }: { navbarData: NavbarData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const logoUrl =
-    "http://127.0.0.1:1337" + navbarData.logo[0].formats.thumbnail.url;
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -84,7 +18,7 @@ function Header({ navbarData }: { navbarData: NavbarData }) {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src={logoUrl}
+              src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${navbarData.logo[0].formats.thumbnail.url}`}
               alt={navbarData.logo[0].formats.thumbnail.name}
               width={40}
               height={40}
@@ -93,7 +27,6 @@ function Header({ navbarData }: { navbarData: NavbarData }) {
             <span className="font-bold text-xl">{navbarData.brand}</span>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-4">
             {navbarData.items.map((link) => (
               <Link key={link.id} href={link.link} className="hover:underline">

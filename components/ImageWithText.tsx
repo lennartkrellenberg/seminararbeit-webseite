@@ -1,16 +1,13 @@
-import { ImageWithText } from "@/app/page";
+import { ImageWithText } from "@/app/types";
 import Image from "next/image";
 
 export const ImageWithTextComponent = ({ data }: { data: ImageWithText }) => {
-  const logoUrl = "http://127.0.0.1:1337" + data.image.formats.small.url;
-  console.log(logoUrl);
-
   return (
     <div className="flex flex-col md:flex-row items-center gap-8 container mx-auto px-4 py-8">
       <div className="w-full md:w-1/2">
         <Image
-          src={logoUrl}
-          alt="Fußballstadion"
+          src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.formats.large.url}`}
+          alt={""}
           width={600}
           height={400}
           className="rounded-lg shadow-lg"

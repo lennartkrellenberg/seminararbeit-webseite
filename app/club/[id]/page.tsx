@@ -1,4 +1,5 @@
-import { Player } from "@/app/types";
+import { fetchClub, fetchNavbar } from "@/app/api/route";
+import { Club, NavbarData, Player } from "@/app/types";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import PlayerCard from "@/components/player-card/PlayerCard";
@@ -6,60 +7,22 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 
 const ClubPage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  async function fetchClub(id: string) {
-    const options = {
-      headers: { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` },
-    };
-
-    try {
-      const res = await fetch(
-        `${process.env.STRAPI_URL}/api/clubs/${id}?populate[logo]=true&populate[players][populate][image]=true&populate[stadium][populate][image]=true`,
-        options
-      );
-      const reponse = await res.json();
-      return reponse.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   const { id } = await params;
 
-  const club = await fetchClub(id);
-
-  async function fetchNavbar() {
-    console.log("Fetching Navbar");
-    const options = {
-      headers: { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` },
-    };
-    try {
-      const res = await fetch(
-        `${process.env.STRAPI_URL}/api/navbar?populate=*`,
-        options
-      );
-      const reponse = await res.json();
-      console.log(reponse.data);
-      return reponse.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+  const club = (await fetchClub(id)) as Club;
   const navbarData = await fetchNavbar();
 
-  //Logo für Verein
-
-  console.log(club);
-  console.log(process.env.STRAPI_URL + club.logo.formats.small.url);
-
   return (
+    // check if club is null
     <div className="min-h-screen flex flex-col">
-      <Header navbarData={navbarData} />
+      <Header navbarData={navbarData as NavbarData} />
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col pb-20 md:flex-row items-center gap-8 ">
             <Image
-              src={process.env.STRAPI_URL + club.logo.formats.small.url}
+              src={
+                process.env.NEXT_PUBLIC_STRAPI_URL + club.logo.formats.small.url
+              }
               alt={`${club.stadium.name}`}
               width={400}
               height={400}
@@ -73,7 +36,9 @@ const ClubPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           <Card className="mb-8">
             <CardContent className="p-0">
               <Image
-                src={process.env.STRAPI_URL + club.stadium.image.url}
+                src={
+                  process.env.NEXT_PUBLIC_STRAPI_URL + club.stadium.image.url
+                }
                 alt={`${club.stadium.name}`}
                 width={800}
                 height={400}

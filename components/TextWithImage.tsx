@@ -1,4 +1,4 @@
-import { TextWithImage } from "@/app/page";
+import { TextWithImage } from "@/app/types";
 import Image from "next/image";
 
 export const TextWithImageComponent = ({ data }: { data: TextWithImage }) => {
@@ -13,8 +13,8 @@ export const TextWithImageComponent = ({ data }: { data: TextWithImage }) => {
       </div>
       <div className="w-full md:w-1/2">
         <Image
-          src={logoUrl}
-          alt="Fußballstadion"
+          src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.formats.large.url}`}
+          alt={""}
           width={600}
           height={400}
           className="rounded-lg shadow-lg"

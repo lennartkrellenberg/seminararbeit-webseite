@@ -1,7 +1,7 @@
-import { ImageTextOverlay, ImageWithText, TextWithImage } from "@/app/page";
 import { ImageWithTextComponent } from "./ImageWithText";
 import { TextWithImageComponent } from "./TextWithImage";
 import { ImageTextOverlayComponent } from "./ImageTextOverlay";
+import { ImageTextOverlay, ImageWithText, TextWithImage } from "@/app/types";
 
 interface ContentRendererProps {
   content: (ImageWithText | TextWithImage | ImageTextOverlay)[];
@@ -28,7 +28,7 @@ export const ContentRenderer = ({ content }: ContentRendererProps) => {
   return (
     <section className="mb-16">
       {content.map((item, index) => (
-        <div key={item.id || index}>{renderComponent(item)}</div>
+        <div key={index}>{renderComponent(item)}</div>
       ))}
     </section>
   );
