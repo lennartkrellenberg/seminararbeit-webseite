@@ -71,7 +71,8 @@ interface NavbarData {
 
 function Header({ navbarData }: { navbarData: NavbarData }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const logoUrl = "http:/127.0.0.1" + navbarData.logo[0].formats.thumbnail.url;
+  const logoUrl =
+    "http://127.0.0.1:1337" + navbarData.logo[0].formats.thumbnail.url;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
