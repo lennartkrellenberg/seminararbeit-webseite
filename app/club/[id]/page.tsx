@@ -13,7 +13,6 @@ const ClubPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const navbarData = await fetchNavbar();
 
   return (
-    // check if club is null
     <div className="min-h-screen flex flex-col">
       <Header navbarData={navbarData as NavbarData} />
       <main className="flex-grow">

@@ -13,7 +13,7 @@ export const TextWithImageComponent = ({ data }: { data: TextWithImage }) => {
       </div>
       <div className="w-full md:w-1/2">
         <Image
-          src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.formats.large.url}`}
+          src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${data.image.formats.small.url}`}
           alt={""}
           width={600}
           height={400}
