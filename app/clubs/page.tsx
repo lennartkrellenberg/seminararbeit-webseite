@@ -1,7 +1,7 @@
 import Header from "@/components/header/header";
 import TeamCard from "@/components/team-card/TeamCard";
 import Footer from "@/components/footer/footer";
-import { fetchClubs, fetchNavbar } from "../api/route";
+import { fetchClubs, fetchNavbar } from "../route";
 import { Club, NavbarData } from "../types";
 
 const ClubsPage = async () => {
