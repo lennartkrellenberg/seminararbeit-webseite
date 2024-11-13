@@ -8,6 +8,10 @@ const ClubsPage = async () => {
   const navbarData = (await fetchNavbar()) as NavbarData;
   const teams = (await fetchClubs()) as Club[];
 
+  if (!navbarData || !teams) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header navbarData={navbarData} />
