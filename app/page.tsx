@@ -1,5 +1,5 @@
 import Header from "@/components/header/header";
-import { fetchLandingPage, fetchNavbar } from "./route";
+import { fetchLandingPage, fetchNavbar } from "../lib/route";
 import { ContentRenderer } from "@/components/ContentRenderer";
 import Footer from "@/components/footer/footer";
 import { LandingPage, NavbarData } from "./types";

@@ -1,4 +1,4 @@
-import { fetchClub, fetchNavbar } from "@/app/route";
+import { fetchClub, fetchNavbar } from "@/lib/route";
 import { Club, NavbarData, Player } from "@/app/types";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
