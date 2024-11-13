@@ -12,18 +12,24 @@ function Header({ navbarData }: { navbarData: NavbarData }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  if (!navbarData) {
+    return null; 
+  }
+
   return (
     <header className="bg-primary text-primary-foreground shadow-md">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${navbarData.logo[0].formats.thumbnail.url}`}
-              alt={navbarData.logo[0].formats.thumbnail.name}
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
+            {navbarData.logo?.[0]?.formats?.thumbnail && (
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${navbarData.logo[0].formats.thumbnail.url}`}
+                alt={navbarData.logo[0].formats.thumbnail.name}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            )}
             <span className="font-bold text-xl">{navbarData.brand}</span>
           </Link>
 
