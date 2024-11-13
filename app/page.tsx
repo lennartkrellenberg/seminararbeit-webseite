@@ -12,7 +12,9 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col">
       <Header navbarData={navbarData} />
       <main className="flex-grow">
-        <ContentRenderer content={landingPage.content} />
+        {landingPage != null && landingPage.content != null && (
+          <ContentRenderer content={landingPage.content} />
+        )}
       </main>
       <Footer />
     </div>
